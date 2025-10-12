@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Wonder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+       body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(102,126,234,0.3) 70%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Main Container */
+        .hero-container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .headline {
+            color: #ffffff;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInScale 1s ease-out;
+            text-shadow: 0 0 30px rgba(255,255,255,0.3);
+        }
+
+        .subheadline {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            animation: fadeInScale 1s ease-out 0.2s backwards;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* THE BUTTON - Maximum Focus */
+        .mega-button {
+            position: relative;
+            display: inline-block;
+            padding: 2rem 4rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f, #c44569);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 
+                0 0 40px rgba(255,107,107,0.6),
+                0 0 80px rgba(255,107,107,0.4),
+                0 20px 60px rgba(0,0,0,0.8);
+            animation: megaPulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+
+        .mega-button::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f, #c44569, #ff6b6b);
+            border-radius: 60px;
+            z-index: -1;
+            filter: blur(60px);
+            opacity: 0.8;
+            animation: rotate 3s linear infinite;
+        }
+
+        .mega-button::after {
+            content: '→';
+            margin-left: 15px;
+            display: inline-block;
+            animation: arrow-move 1s ease-in-out infinite;
+        }
+
+        @keyframes megaPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 0 40px rgba(255,107,107,0.6),
+                    0 0 80px rgba(255,107,107,0.4),
+                    0 20px 60px rgba(0,0,0,0.8);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 60px rgba(255,107,107,0.8),
+                    0 0 120px rgba(255,107,107,0.6),
+                    0 25px 70px rgba(0,0,0,0.9);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes arrow-move {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
+
+        .mega-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 
+                0 0 80px rgba(255,107,107,0.9),
+                0 0 160px rgba(255,107,107,0.7),
+                0 30px 80px rgba(0,0,0,0.9);
+        }
+
+        .mega-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Animated rings around button */
+        .button-wrapper {
+            position: relative;
+            display: inline-block;
+            animation: fadeInScale 1s ease-out 0.5s backwards;
+        }
+
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid rgba(255,107,107,0.3);
+            border-radius: 50%;
+            animation: ringExpand 2s ease-out infinite;
+        }
+
+        .ring:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .ring:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .ring:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes ringExpand {
+            0% {
+                width: 100px;
+                height: 100px;
+                opacity: 1;
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                opacity: 0;
+            }
+        }
+
+        /* Particles */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 3s ease-in-out infinite;
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2rem;
+            }
+            
+            .subheadline {
+                font-size: 1rem;
+            }
+
+            .mega-button {
+                font-size: 1.5rem;
+                padding: 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spotlight Effect -->
+    <div class="spotlight"></div>
+
+    <!-- Particles -->
+    <div id="particles"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-container">
+        <h1 class="headline">🎯 Your Journey Starts Here</h1>
+        <p class="subheadline" id="score">One click. Infinite possibilities.</p>
+        
+        <div class="button-wrapper">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <button class="mega-button" onclick="main()">Click Me Now</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
